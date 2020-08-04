@@ -9,7 +9,7 @@
 @section('content')
 <div class="card">
     <div class="card-body">
-        <h3 class="card-title">Create Project</h3>
+        <h3 class="card-title">Create List</h3>
         <hr>
         <form action="{{route('projects.store')}}" method="post" novalidate>
             @csrf
@@ -17,7 +17,8 @@
                 <label for="title">Title</label>
                 <input type="text"
                     class="form-control @error('title') {{'is-invalid'}} @enderror {{old('title') ? 'is-valid' : ''}}"
-                    name="title" id="title" aria-describedby="helpId" placeholder="Title" value="{{old('title')}}">
+                    name="title" id="title" aria-describedby="helpId" placeholder="Title" value="{{old('title')}}"
+                    required>
 
                 @if (old('title'))
                 <small class="text-success">Valid!</small>
@@ -31,7 +32,7 @@
                 <label for="description">Description</label>
                 <textarea
                     class="form-control @error('description') {{'is-invalid'}} @enderror {{old('description') ? 'is-valid' : ''}}"
-                    name="description" id="description" rows="3">{{old('description')}}</textarea>
+                    name="description" id="description" rows="3" required>{{old('description')}}</textarea>
 
                 @if (old('description'))
                 <small class="text-success">Valid!</small>

@@ -26,7 +26,7 @@
                 </h4>
             </div>
             <div class="col-6 d-inline-flex justify-content-end align-content-center">
-                <small class="mt-2 mr-2">{{$project->updated_at}}</small>
+                <small class="mt-2 mr-2">{{date('H:m d.m.Y', strtotime($project->updated_at))}}</small>
                 <a href="{{route('projects.edit', $project->id)}}">
                     <button type="button" class="btn btn-link mx-1"><i class="fa fa-pencil-square-o"
                             aria-hidden="true"></i>
