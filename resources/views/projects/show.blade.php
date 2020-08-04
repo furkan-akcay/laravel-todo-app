@@ -13,10 +13,10 @@
             <h2 class="col card-title">{{$project->title}}</h2>
 
             <div class="col d-inline-flex justify-content-end align-content-center">
-                <small class="mt-2">{{date('H:m d.m.Y', strtotime($project->updated_at))}}</small>
+                <small class="mt-2">{{date('H:i d.m.Y', strtotime($project->updated_at))}}</small>
 
                 <a href="{{route('projects.edit', $project->id)}}">
-                    <button type="button" class="btn btn-link mx-1"><i class="fa fa-pencil-square-o"
+                    <button type="button" class="btn btn-link mr-1 ml-3"><i class="fa fa-pencil-square-o"
                             aria-hidden="true"></i>
                         Update</button>
                 </a>
@@ -24,15 +24,19 @@
                 <form action="{{route('projects.destroy', $project->id)}}" method="post">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-link mx-1"><i class="fa fa-trash-o" aria-hidden="true"></i>
+                    <button type="submit" class="btn btn-link"><i class="fa fa-trash-o" aria-hidden="true"></i>
                         Delete</button>
                 </form>
 
             </div>
         </div>
+
         <hr>
+
         <p class="card-text">{{$project->description}}</p>
+
         <hr>
+
         <form action="{{route('tasks.store', $project->id)}}" method="post">
             @csrf
             <div class="form-row">
@@ -52,8 +56,11 @@
                 @enderror
             </div>
         </form>
+
         <hr>
-        <h4 class="card-title mt-5">Tasks</h4>
+
+        <h4 class="card-title mt-2">Tasks</h4>
+
         <ul class="list-group list-group-flush">
             @foreach ($project->tasks as $task)
             <li class="list-group-item align-content-center">
@@ -65,10 +72,10 @@
                         {{$task->completed ? 'checked' : ''}}>
                     <span class="glyphicon glyphicon-ok"></span>
 
-                    <label style="{{$task->completed ? 'text-decoration: line-through' : ''}}">{{$task->title}}</label>
+                    <label>{{$task->title}}</label>
 
                     @if ($task->completed)
-                    <small class=" text-success">Completed!</small>
+                    <span class="badge badge-success badge-pill">Completed!</span>
                     @endif
                 </form>
             </li>
