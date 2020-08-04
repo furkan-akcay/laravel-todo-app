@@ -7,13 +7,18 @@
     <title>@yield('title')</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.1.7/css/fork-awesome.min.css"
+        integrity="sha256-gsmEoJAws/Kd3CjuOQzLie5Q3yshhvmo7YNtBG7aaEY=" crossorigin="anonymous">
     <!--other-css-->
 </head>
 
 <body>
-    <main class="container">
+    <main class="container my-5">
         <div class="row">
-            @yield('content')
+            <div class="col">
+                @yield('breadcrumb')
+                @yield('content')
+            </div>
         </div>
     </main>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
