@@ -13,10 +13,16 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         return view('projects.index', [
-            'projects' => Project::latest('updated_at')->get(),
+            'projects' => auth()->user()->projects()->latest('updated_at')->get(),
         ]);
     }
 
@@ -43,6 +49,7 @@ class ProjectController extends Controller
             'description' => 'required'
         ]);
         Project::create([
+            'user_id' => auth()->user()->id,
             'title' => $request->title,
             'description' => $request->description
         ]);

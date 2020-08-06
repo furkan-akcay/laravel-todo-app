@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return redirect(route('projects.index'));
-})->name('home');
+})->name('homepage');
 
 Route::resource('projects', 'ProjectController');
 Route::post('projects/{project}/tasks/create', 'ProjectController@storeTask')->name('tasks.store');
