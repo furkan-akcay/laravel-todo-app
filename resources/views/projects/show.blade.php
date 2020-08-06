@@ -13,7 +13,7 @@
             <h2 class="col card-title">{{$project->title}}</h2>
 
             <div class="col d-inline-flex justify-content-end align-content-center">
-                <small class="mt-2">{{date('H:i d.m.Y', strtotime($project->updated_at))}}</small>
+                <small class="mt-2">{{$updated_at}}</small>
 
                 <a href="{{route('projects.edit', $project->id)}}">
                     <button type="button" class="btn btn-link mr-1 ml-3"><i class="fa fa-pencil-square-o"
@@ -42,7 +42,7 @@
             <div class="form-row">
                 <div class="col-10">
                     <input type="text" name="task" id="task"
-                        class="form-control w-100 @error('task') {{'is-invalid'}} @enderror" placeholder="Task"
+                        class="form-control w-100 @error('task') {{'is-invalid'}} @enderror" placeholder="Add a Task..."
                         aria-describedby="helpId" required>
                 </div>
                 <div class="col-2">
@@ -57,6 +57,7 @@
             </div>
         </form>
 
+        @if (isset($project->tasks) && count($project->tasks) > 0)
         <hr>
 
         <h4 class="card-title mt-2">Tasks</h4>
@@ -72,16 +73,20 @@
                         {{$task->completed ? 'checked' : ''}}>
                     <span class="glyphicon glyphicon-ok"></span>
 
-                    <label>{{$task->title}}</label>
+                    <label>
+                        {{$task->title}}
+                    </label>
 
                     @if ($task->completed)
-                    <span class="badge badge-success badge-pill">Completed!</span>
+                    <span class="badge badge-success badge-pill" data-toggle="tooltip" data-placement="right"
+                        title="{{$updated_at}}">Completed!</span>
                     @endif
                 </form>
             </li>
             @endforeach
         </ul>
 
+        @endif
     </div>
 </div>
 @endsection

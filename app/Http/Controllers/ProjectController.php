@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Project;
 use App\Task;
 use Illuminate\Http\Request;
-use PhpParser\Node\Expr\AssignOp\Pow;
 
 class ProjectController extends Controller
 {
@@ -60,6 +59,7 @@ class ProjectController extends Controller
     {
         return view('projects.show', [
             'project' => $project,
+            'updated_at' => date('H:i d.m.Y', strtotime($project->updated_at))
         ]);
     }
 
@@ -89,7 +89,6 @@ class ProjectController extends Controller
             'title' => 'required',
             'description' => 'required'
         ]);
-
         $project->update([
             'title' => $request->title,
             'description' => $request->description,
@@ -114,11 +113,9 @@ class ProjectController extends Controller
         $request->validate([
             'title' => $request->task,
         ]);
-
         $project->tasks()->create([
             'title' => $request->task,
         ]);
-
         return redirect(route('projects.show', $project->id));
     }
 
@@ -127,7 +124,6 @@ class ProjectController extends Controller
         $task->update([
             'completed' => $request->has('completed'),
         ]);
-
         return redirect()->back();
     }
 }
