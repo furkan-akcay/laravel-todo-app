@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect(route('projects.index'));
+    return view('welcome');
 })->name('homepage');
 
 //Projects
@@ -27,9 +27,4 @@ Route::delete('tasks/{task}', 'TaskController@destroy')->name('tasks.destroy');
 Route::patch('tasks/{task}/complete', 'TaskController@complete')->name('tasks.complete');
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
