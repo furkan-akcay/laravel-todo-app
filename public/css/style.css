@@ -4,3 +4,13 @@
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
 }
+
+.delete:hover {
+    background-color: #DC3545;
+    color: white;
+    text-decoration: none;
+}
+
+.delete:active {
+    box-shadow: 2px 2px 15px #DC3545;
+}

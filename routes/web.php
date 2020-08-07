@@ -17,9 +17,18 @@ Route::get('/', function () {
     return redirect(route('projects.index'));
 })->name('homepage');
 
+//Projects
 Route::resource('projects', 'ProjectController');
-Route::post('projects/{project}/tasks/create', 'ProjectController@storeTask')->name('tasks.store');
-Route::patch('projects/tasks/{task}/completed', 'ProjectController@completed')->name('tasks.completed');
+
+// Tasks
+Route::post('projects/{project}/tasks', 'ProjectController@storeTask')->name('tasks.store');
+Route::patch('projects/tasks/{task}/complete', 'ProjectController@completedTask')->name('tasks.completed');
+Route::delete('projects/tasks/{task}', 'ProjectController@destroyTask')->name('tasks.destroy');
+Route::patch('projects/tasks/{task}', 'ProjectController@updateTask')->name('tasks.update');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 

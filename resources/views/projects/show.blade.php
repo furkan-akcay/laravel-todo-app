@@ -24,7 +24,7 @@
                 <form action="{{route('projects.destroy', $project->id)}}" method="post">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-link"><i class="fa fa-trash-o" aria-hidden="true"></i>
+                    <button type="submit" class="btn btn-link delete"><i class="fa fa-trash-o" aria-hidden="true"></i>
                         Delete</button>
                 </form>
 
@@ -64,28 +64,75 @@
 
         <ul class="list-group list-group-flush">
             @foreach ($project->tasks as $task)
-            <li class="list-group-item align-content-center">
-                <form action="{{route('tasks.completed', $task->id)}}" method="post">
-                    @csrf
-                    @method('PATCH')
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-auto">
+                        <form action="{{route('tasks.completed', $task->id)}}" method="post">
+                            @csrf
+                            @method('PATCH')
+                            <input type="checkbox" autocomplete="off" name="completed" onchange="this.form.submit()"
+                                {{$task->completed ? 'checked' : ''}}>
+                            <span class="glyphicon glyphicon-ok"></span>
+                        </form>
+                    </div>
 
-                    <input type="checkbox" autocomplete="off" name="completed" onchange="this.form.submit()"
-                        {{$task->completed ? 'checked' : ''}}>
-                    <span class="glyphicon glyphicon-ok"></span>
+                    <div class="col">
+                        <label>
+                            {{$task->title}}
+                        </label>
+                    </div>
 
-                    <label>
-                        {{$task->title}}
-                    </label>
+                    <div class="col-auto">
+                        @if ($task->completed)
+                        <small class="text-success">Completed at
+                            {{date('H:i d.m.Y', strtotime($task->updated_at))}}</small>
+                        @endif
+                    </div>
 
-                    @if ($task->completed)
-                    <span class="badge badge-success badge-pill" data-toggle="tooltip" data-placement="right"
-                        title="{{$updated_at}}">Completed!</span>
-                    @endif
-                </form>
+                    <div class="col-auto">
+                        <button class="btn btn-link p-0 mx-2" data-toggle="collapse"
+                            data-target="#collapseUpdateTask{{$task->id}}" aria-expanded="false"
+                            aria-controls="collapseExample">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </button>
+                    </div>
+
+                    <div class="col-auto">
+                        <form action="{{route('tasks.destroy', $task->id)}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-link p-0 ml-2"><i class="fa fa-trash-o"
+                                    aria-hidden="true"></i></button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="collapse" id="collapseUpdateTask{{$task->id}}">
+                    <form action="{{route('tasks.update', $task->id)}}" method="post">
+                        @csrf
+                        @method('PATCH')
+                        <div class="form-row">
+                            <div class="col-10">
+                                <input type="text" name="updatedTask" id="updatedTask"
+                                    class="form-control w-100 @error('task') {{'is-invalid'}} @enderror"
+                                    value="{{$task->title}}" aria-describedby="helpId" required>
+                            </div>
+                            <div class="col-2">
+                                <button type="submit" class="btn btn-link">Update</button>
+                            </div>
+
+                            @error('updatedTask')
+                            <div class="col-auto mt-1">
+                                <small class="text-danger">{{$message}}</small>
+                            </div>
+                            @enderror
+                        </div>
+                    </form>
+                </div>
+
             </li>
             @endforeach
         </ul>
-
         @endif
     </div>
 </div>

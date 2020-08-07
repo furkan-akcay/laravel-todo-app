@@ -126,11 +126,17 @@ class ProjectController extends Controller
         return redirect(route('projects.show', $project->id));
     }
 
-    public function completed(Request $request, Task $task)
+    public function completedTask(Request $request, Task $task)
     {
         $task->update([
             'completed' => $request->has('completed'),
         ]);
+        return redirect()->back();
+    }
+
+    public function destroyTask(Task $task)
+    {
+        $task->delete();
         return redirect()->back();
     }
 }

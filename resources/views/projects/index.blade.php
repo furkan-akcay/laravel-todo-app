@@ -2,14 +2,10 @@
 
 @section('title', 'Projects')
 
-@section('breadcrumb')
-{{ Breadcrumbs::render('projects') }}
-@endsection
-
 @section('content')
 <div class="row my-3">
     <div class="col-10">
-        <h3>To Do List</h3>
+        <h3>To Do App</h3>
     </div>
     <div class="col-2 d-inline-flex justify-content-end align-content-center">
         <a href="{{route('projects.create')}}">Create Project</a>
@@ -37,7 +33,8 @@
                 <form action="{{route('projects.destroy', $project->id)}}" method="post">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-link mx-1"><i class="fa fa-trash-o" aria-hidden="true"></i>
+                    <button type="submit" class="btn btn-link mx-1 delete"><i class="fa fa-trash-o"
+                            aria-hidden="true"></i>
                         Delete</button>
                 </form>
 
