@@ -21,10 +21,10 @@ Route::get('/', function () {
 Route::resource('projects', 'ProjectController');
 
 // Tasks
-Route::post('projects/{project}/tasks', 'ProjectController@storeTask')->name('tasks.store');
-Route::patch('projects/tasks/{task}/complete', 'ProjectController@completedTask')->name('tasks.completed');
-Route::delete('projects/tasks/{task}', 'ProjectController@destroyTask')->name('tasks.destroy');
-Route::patch('projects/tasks/{task}', 'ProjectController@updateTask')->name('tasks.update');
+Route::post('projects/{project}/tasks', 'TaskController@store')->name('tasks.store');
+Route::patch('tasks/{task}', 'TaskController@update')->name('tasks.update');
+Route::delete('tasks/{task}', 'TaskController@destroy')->name('tasks.destroy');
+Route::patch('tasks/{task}/complete', 'TaskController@complete')->name('tasks.complete');
 
 Auth::routes();
 

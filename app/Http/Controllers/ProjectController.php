@@ -45,7 +45,7 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
+            'title' => 'required|min:3|max:255',
             'description' => 'required'
         ]);
         Project::create([
@@ -93,7 +93,7 @@ class ProjectController extends Controller
     public function update(Request $request, Project $project)
     {
         $request->validate([
-            'title' => 'required',
+            'title' => 'required|min:3|max:255',
             'description' => 'required'
         ]);
         $project->update([
@@ -113,30 +113,5 @@ class ProjectController extends Controller
     {
         $project->delete();
         return redirect(route('projects.index'));
-    }
-
-    public function storeTask(Request $request, Project $project)
-    {
-        $request->validate([
-            'title' => $request->task,
-        ]);
-        $project->tasks()->create([
-            'title' => $request->task,
-        ]);
-        return redirect(route('projects.show', $project->id));
-    }
-
-    public function completedTask(Request $request, Task $task)
-    {
-        $task->update([
-            'completed' => $request->has('completed'),
-        ]);
-        return redirect()->back();
-    }
-
-    public function destroyTask(Task $task)
-    {
-        $task->delete();
-        return redirect()->back();
     }
 }
