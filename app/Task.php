@@ -19,4 +19,9 @@ class Task extends Model
             'completed' => $request->has('completed'),
         ]);
     }
+
+    public function updatedAt()
+    {
+        return date('H:i d.m.Y', strtotime($this->updated_at));
+    }
 }

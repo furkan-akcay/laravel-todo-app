@@ -93,7 +93,7 @@
                             <div class="col-auto">
                                 @if($task->completed)
                                     <small class="text-success">Completed at
-                                        {{ date('H:i d.m.Y', strtotime($task->updated_at)) }}</small>
+                                        {{ $task->updatedAt() }}</small>
                                 @endif
                             </div>
 
