@@ -14,3 +14,7 @@
 .delete:active {
     box-shadow: 2px 2px 15px #DC3545;
 }
+
+.trash:hover {
+    color: #DC3545;
+}

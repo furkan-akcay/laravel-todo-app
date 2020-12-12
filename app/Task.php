@@ -12,4 +12,11 @@ class Task extends Model
     {
         return $this->belongsTo(Project::class);
     }
+
+    public function complete($request)
+    {
+        return $this->update([
+            'completed' => $request->has('completed'),
+        ]);
+    }
 }

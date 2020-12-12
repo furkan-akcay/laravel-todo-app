@@ -14,11 +14,11 @@
             <h2 class="col card-title">{{ $project->title }}</h2>
 
             <div class="col d-inline-flex justify-content-end align-content-center">
-                <small class="mt-2">{{ $updated_at }}</small>
+                <small class="mt-2">{{ $project->updatedAt() }}</small>
 
                 <!--Update project page link-->
                 <a href="{{ route('projects.edit', $project->id) }}">
-                    <button type="button" class="btn btn-link mr-1 ml-3"><i class="fa fa-pencil-square-o"
+                    <button type="button" class="ml-3 mr-1 btn btn-link"><i class="fa fa-pencil-square-o"
                             aria-hidden="true"></i>
                         Update</button>
                 </a>
@@ -64,7 +64,7 @@
         <!--List tasks-->
         @if(isset($project->tasks) && count($project->tasks) > 0)
             <hr>
-            <h4 class="card-title mt-2">Tasks</h4>
+            <h4 class="mt-2 card-title">Tasks</h4>
 
             <ul class="list-group list-group-flush">
                 @foreach($project->tasks as $task)
@@ -99,7 +99,7 @@
 
                             <!--Update task collapse button-->
                             <div class="col-auto">
-                                <button class="btn btn-link p-0 mx-2" data-toggle="collapse"
+                                <button class="p-0 mx-2 btn btn-link" data-toggle="collapse"
                                     data-target="#collapseUpdateTask{{ $task->id }}" aria-expanded="false"
                                     aria-controls="collapseExample">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -112,7 +112,7 @@
                                     method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-link p-0 ml-2"><i class="fa fa-trash-o"
+                                    <button type="submit" class="p-0 ml-2 btn btn-link trash"><i class="fa fa-trash-o"
                                             aria-hidden="true"></i></button>
                                 </form>
                             </div>

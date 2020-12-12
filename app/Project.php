@@ -17,4 +17,18 @@ class Project extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function createProject($request)
+    {
+        return $this->create([
+            'user_id' => auth()->user()->id,
+            'title' => $request['title'],
+            'description' => $request['description']
+        ]);
+    }
+
+    public function updatedAt()
+    {
+        return date('H:i d.m.Y', strtotime($this->updated_at));
+    }
 }
